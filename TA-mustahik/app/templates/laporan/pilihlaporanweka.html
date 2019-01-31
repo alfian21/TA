@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/based/head.html' %}  
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+      {% include '/based/nav.html' %} 
+    <!-- Navbar -->
+    <!-- Main Sidebar Container -->
+    {% include '/based/sidebar.html' %}
+    <!-- /.sidebar -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Test </h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/save_test">Home</a></li>
+              <li class="breadcrumb-item active">Test</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    {% include '/based/flash.html'%}
+<!--contact-->
+ <!-- Main content -->
+ <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+      <div class="col-12 col-md-12">
+            <!-- Profile Image -->
+          <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Test List
+                  </div>
+                
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">Tabel </h3>
+              
+                              
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                              <table class="table table-hover">
+                                <tbody><tr>
+                                  <th>ID</th>
+                                  <th>Nama Test</th>
+                                  <th>Max Iterasi</th>
+                                  <th>Error Latih</th>
+                                  <th>Success Latih (%)</th>
+                                  <th>Error Uji</th>
+                                  <th>Success Uji (%)</th>
+                                  <th>Pangkat</th>
+                                  <th>Jumlah Data Latih</th>
+                                  <th>Jumlah Data Uji</th>
+                                  <th>Cek</th>
+                                </tr>
+                                {% for post in post %}
+                                
+                                <tr>
+                                  <td>{{post[0]}}</td>
+                                  <td>{{post[1]}}</td>
+                                  <td>{{post[2]}}</td>
+                                  <td>{{post[3]}}</td>
+                                  <td>{{post[4]}}</td>
+                                  <td>{{post[5]}}</td>
+                                  <td>{{post[6]}}</td>
+                                  <td>{{post[8]}}</td>
+                                  <td>{{post[9]}}</td>
+                                  <td>{{post[10]}}</td>
+                                  <td> 
+                                      <form target="_blank" action="/laporan_data_weka/{{post[0]}}" method="POST">
+                                      <button type="submit" class="btn btn-primary">Cetak Laporan</button>
+                                    </form> 
+                                  </td>
+                                 
+                                </tr>
+                              
+                               {% endfor %}
+                              </tbody></table>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                     
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                    </div>
+                  
+                  
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+
+   
+</div> 
+<footer class="main-footer">
+  <!-- To the right -->
+ 
+  <!-- Default to the left -->
+  <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+</div>
+{% include '/based/js.html' %}
+</body>
+</html>

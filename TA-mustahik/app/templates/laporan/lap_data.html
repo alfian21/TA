@@ -1,0 +1,159 @@
+<style>
+        .table-bordered {
+            border: 1.5px solid rgb(2, 2, 2);
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;  
+        }
+        .thead-default {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+            background-color: rgb(193, 196, 194);
+        }
+        .header {
+            display: table-header-group;
+            vertical-align: middle;
+            align: middle;
+            border-color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        body {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.875rem;
+            font-weight: normal;
+            line-height: 1.5;
+            color: #263238;
+        }
+        html {
+            box-sizing: border-box;
+            font-family: sans-serif;
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -ms-overflow-style: scrollbar;
+            -webkit-tap-highlight-color: transparent;
+        }
+        html {
+            font-family: sans-serif;
+            line-height: 1.15;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        </style>
+    <table class="header table">
+        <tr>
+            <td>
+                <center><img src="{{logo}}" style="max-height: 100px; width: auto;" alt=""></center>
+            </td>
+            <td>
+                <h1 align="center" style="padding-right: 100px; margin:0px">Sistem Pendudukung Keputusan Menentukan Mustahik Desa Panawuan </h1>
+                <h3 align="center" style="padding-right: 100px; margin:0px">Laporan Data </h2>
+                <p align="center" style="padding-right: 100px; margin:0px"> kecamatan Cigandamekar, Kuningan, Jawa Barat, Indonesia</p>
+            </td>        
+        </tr>
+    </table>
+    
+    
+    
+    
+    
+    <hr>
+        <table class="table">
+            <tr>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Tanggal Unduh :{{waktu}}</p>            
+                </td>
+                <td style="width:5%;">
+                </td>
+            </tr>
+            {% for post in post1 %}
+            <tr>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Max Iterasi :{{post[2]}}</p>            
+                </td>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Persentasi Data latih :{{post[4]}}</p> 
+                </td>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Persentasi Data uji :{{post[6]}}</p>            
+                </td>
+            </tr>
+            <tr>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Pangkat :{{post[8]}}</p> 
+                </td>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Jumlah Data Latih :{{post[9]}}</p> 
+                </td>
+                <td style="width:5%;">
+                    <p style="padding: 0px; margin:0px">Jumlah Data Uji :{{post[10]}}</p>            
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table class="table table-bordered table-sm table-lg-responsive" border="1" >
+            <thead class="thead-default">
+            <tr>
+                <th>Nama</th>
+                <th>Umur</th>
+                <th>Penghasilan</th>
+                <th>Jml Tanggungan</th>
+                <th>Harga Rumah</th>
+                <th>Lama Pendidikan</th>
+                <th>Fas Kesehatan</th>
+                <th>manual cluster</th>
+                <th>program cluster </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if post %}
+                {% for post in post %}
+                <tr>
+                <td align="left">{{ post[2] }}</td>
+                <td align="center">{{ post[3] }}</td>
+                <td align="center">{{ post[4] }}</td>
+                <td align="center">{{ post[5] }}</td>
+                <td align="center">{{ post[6] }}</td>
+                <td align="center">{{ post[7] }}</td>
+                <td align="center">{{ post[8] }}</td>
+                <td align="center">
+                    {% if post[9] == 1 %} 
+                    Ya
+                    {% else %}
+                    Tidak
+                    {% endif %}
+                </td>
+                <td align="center">
+                        {% if post[11] == 1 %} 
+                        Ya
+                        {% else %}
+                        Tidak
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                        <td colspan="18" height="100" align="center"><h5 style="margin-top: 40px;"><b>Data Tidak Ditemukan</b></h5></td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        

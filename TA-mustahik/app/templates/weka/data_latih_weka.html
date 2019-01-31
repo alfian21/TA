@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/based/head.html' %}  
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+      {% include '/based/nav.html' %} 
+    <!-- Navbar -->
+    <!-- Main Sidebar Container -->
+    {% include '/based/sidebar.html' %}
+    <!-- /.sidebar -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Data Latih Dengan Seleksi Ciri </h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/save_test_weka">Home</a></li>
+              <li class="breadcrumb-item active">Data Latih Dengan Seleksi Ciri</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    {% include '/based/flash.html'%}
+<!--contact-->
+ <!-- Main content -->
+ <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <form action="/count_data_weka" method="POST">
+            <div class="form-group">
+                <label for="">Max Iterasi </label>
+                <input type="number" class="form-control" id="name" name="iterasi_input"  required >
+            </div>
+            <div class="form-group">
+                <label for="">Max Error</label>
+                <input type="number" class="form-control" id="name" name="error_input" step="0.0000000001" required >
+            </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label for="">Pangkat(W) </label>
+            <input type="number" class="form-control" id="name" name="w_input" required >
+        </div>
+        <div class="form-group">
+            <label for="">    </label>
+            <button type="submit" class="btn btn-primary float-right">Hitung</button>
+        </div>
+          </form>
+      </div>
+    
+        
+        <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Tabel Data Latih Dengan Seleksi Ciri</h3>
+
+                  
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                      <th>ID</th>
+                      <th>Id Test</th>
+                      <th>Nama Mustahik</th>
+                      <th>Usia</th>
+                      <th>Penghasilan</th>
+                      <th>Manual Cluster</th>
+                    </tr>
+                    {% for post in post %}
+                    
+                    <tr>
+                      <td>{{post[0]}}</td>
+                      <td>{{post[1]}}</td>
+                      <td>{{post[2]}}</td>
+                      <td>{{post[3]}}</td>
+                      <td>{{post[4]}}</td>
+                      <td>
+                          {% if post[5] == 1 %}
+                          YA
+                          {% else %}
+                          TIDAK
+                          {% endif %}
+                      </td>
+                      
+                    </tr>
+                    
+                    {% endfor %}
+                  </tbody></table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+
+   
+</div> 
+<footer class="main-footer">
+  <!-- To the right -->
+ 
+  <!-- Default to the left -->
+  <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+</div>
+{% include '/based/js.html' %}
+</body>
+</html>

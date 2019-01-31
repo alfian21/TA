@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/based/head.html' %}  
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+      {% include '/based/nav.html' %} 
+    <!-- Navbar -->
+    <!-- Main Sidebar Container -->
+    {% include '/based/sidebar.html' %}
+    <!-- /.sidebar -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Test </h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/save_test">Home</a></li>
+              <li class="breadcrumb-item active">Test</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    {% include '/based/flash.html'%}
+<!--contact-->
+ <!-- Main content -->
+ <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+            <div class="col-md-12">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart" height="215"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+            </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <ul class="chart-legend clearfix">
+                    <li><i class="fa fa-circle-o text-success"></i> Sesuai : {labels}}% ({{labels}})</li>
+                    <li><i class="fa fa-circle-o text-warning"></i> Tidak Sesuai : {{values}}% ({{values}})</li>
+                    <li><i class="fa fa-circle-o text-primary"></i> Jumlah Semua Data : {{values+labels}}</li>
+                  </ul>
+                </div>
+      
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+</div> 
+<footer class="main-footer">
+  <!-- To the right -->
+ 
+  <!-- Default to the left -->
+  <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+</div>
+{% include '/based/js.html' %}
+<script>
+$(function(){
+    'use strict'
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieChart       = new Chart(pieChartCanvas)
+    var PieData        = [
+      {
+        value    : {{labels}},
+        color    : '#28a745',
+        highlight: '#28a745',
+        label    : 'Sesuai'
+      },
+      {
+        value    : {{values}},
+        color    : '#ffc107',
+        highlight: '#ffc107',
+        label    : 'Tidak Sesuai'
+      }
+    ]
+    var pieOptions     = {
+      //Boolean - Whether we should show a stroke on each segment
+      segmentShowStroke    : true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor   : '#fff',
+      //Number - The width of each segment stroke
+      segmentStrokeWidth   : 1,
+      //Number - The percentage of the chart that we cut out of the middle
+      percentageInnerCutout: 40, // This is 0 for Pie charts
+      //Number - Amount of animation steps
+      animationSteps       : 100,
+      //String - Animation easing effect
+      animationEasing      : 'easeOutBounce',
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate        : true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale         : false,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive           : true,
+      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio  : false
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    pieChart.Doughnut(PieData, pieOptions)
+    //-----------------
+    //- END PIE CHART -
+    //-----------------
+  })
+</script>
+</body>
+</html>

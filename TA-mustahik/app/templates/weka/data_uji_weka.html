@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/based/head.html' %}  
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+      {% include '/based/nav.html' %} 
+    <!-- Navbar -->
+    <!-- Main Sidebar Container -->
+    {% include '/based/sidebar.html' %}
+    <!-- /.sidebar -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Data Uji Dengan Seleksi Ciri</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/save_test_weka">Home</a></li>
+              <li class="breadcrumb-item active">Data Uji Dengan Seleksi Ciri</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    {% include '/based/flash.html'%}
+<!--contact-->
+ <!-- Main content -->
+ <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="card card-info col-12 col-sm-8">
+              <div class="card-header">
+                <h3 class="card-title">Info Data</h3>
+              </div>
+              <div class="card-body">
+          <div class="col-12 col-md-4" >  </div>
+          <div class="col-12 col-md-4" >
+              <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                      <th>Jumlah Data Latih</th>
+                      <th>Jumlah Data Uji</th>
+                    </tr>
+                    {% for post in post1 %}
+                    
+                    <tr>
+                      <td>{{post[0]}}</td>
+                      <td>{{post[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody></table>
+                </div>
+          </div>
+          <div class="col-12 col-md-4" ></div>
+
+
+          <div class="col-12 col-md-12">
+              <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                      <th>Nama Test </th>
+                      <th>Max Iterasi (Latih) </th>
+                      <th>Error Latih </th>
+                      <th>Persentasi Kecocokan Latih</th>
+                      <th>Error Uji</th>
+                      <th>Persentasi Kecocokan Uji </th>
+                      <th>Pangkat (W) </th>
+                    </tr>
+                    {% for post in post3 %}
+                    
+                    <tr>
+                      <td>{{post[1]}}</td>
+                      <td>{{post[2]}}</td>
+                      <td>{{post[3]}}</td>
+                      <td>{{post[4]}}</td>
+                      <td>{{post[5]}}</td>
+                      <td>{{post[6]}}</td>
+                      <td>{{post[8]}}</td>
+                      
+                    </tr>
+                    {% endfor %}
+                  </tbody></table>
+                </div>
+          </div>
+         
+
+        <div class="col-12 col-md-8" >
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <tbody><tr>
+                    <th>Data Latih "YA" </th>
+                    <th>Data Latih "TIDAK"</th>
+                    <th>Program Latih "YA" </th>
+                    <th>Program Latih "TIDAK"</th>
+                  </tr>
+                  {% for post in post2 %}
+                  
+                  <tr>
+                    <td>{{post[2]}}</td>
+                    <td>{{post[3]}}</td>
+                    <td>{{post[4]}}</td>
+                    <td>{{post[5]}}</td>
+                    
+                  </tr>
+                  {% endfor %}
+                </tbody></table>
+              </div>
+        </div>
+       
+
+      <div class="col-12 col-md-6" >
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+              <tbody><tr>
+                <th>Cek Cluster</th>
+                <th>Action</th>
+              </tr>
+              <tr>
+                <td>
+                  <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#cek_cluster">Cek Cluster</button>
+                </td>
+                <td>
+                  <form action="/count_data_uji_weka" method="POST">
+                  <button type="submit" class="btn btn-primary float-right">Uji Data</button>
+                  </form> 
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
+    </div>
+   
+  </div>
+  <!-- /.card-body -->
+      </div>
+
+
+        <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Tabel Data Uji Dengan Seleksi Ciri</h3>
+
+                  
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                      <th>ID</th>
+                      <th>Id Test</th>
+                      <th>Nama Mustahik</th>
+                      <th>Usia</th>
+                      <th>Penghasilan</th>
+                      <th>Manual Cluster</th>
+                    </tr>
+                    {% for post in post %}
+                    
+                    <tr>
+                      <td>{{post[0]}}</td>
+                      <td>{{post[1]}}</td>
+                      <td>{{post[2]}}</td>
+                      <td>{{post[3]}}</td>
+                      <td>{{post[4]}}</td>
+                      <td>
+                          {% if post[5] == 1 %}
+                          YA
+                          {% else %}
+                          TIDAK
+                          {% endif %}
+                      </td>
+                      
+                    </tr>
+                    
+                    {% endfor %}
+                  </tbody></table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <div class="modal fade" id="cek_cluster" role="dialog">
+      <div class="modal-dialog">
+  
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+             <h4 class="modal-title">Pusat Cluster</h4>
+          </div>
+          <div class="modal-body">
+            <form class="" action="/cek_cluster" method="POST">
+              
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <tbody><tr>
+                    <th>Cluster 1,1</th>
+                    <th>Cluster 1,2</th>
+                    <th>Cluster 1,3</th>
+                    <th>Cluster 1,4</th>
+                    <th>Cluster 1,5</th>
+                    <th>Cluster 1,6</th>
+                    <th>Cluster 2,1</th>
+                    <th>Cluster 2,2</th>
+                    <th>Cluster 2,3</th>
+                    <th>Cluster 2,4</th>
+                    <th>Cluster 2,5</th>
+                    <th>Cluster 2,6</th>
+                  </tr>
+                  {% for post in post3 %}
+                  <tr>
+                    <td>{{post[9]}}</td>
+                    <td>{{post[10]}}</td>
+                    <td>{{post[11]}}</td>
+                    <td>{{post[12]}}</td>
+                    <td>{{post[13]}}</td>
+                    <td>{{post[14]}}</td>
+                    <td>{{post[15]}}</td>
+                    <td>{{post[16]}}</td>
+                    <td>{{post[17]}}</td>
+                    <td>{{post[18]}}</td>
+                    <td>{{post[19]}}</td>
+                    <td>{{post[20]}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody></table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+   
+</div> 
+<footer class="main-footer">
+  <!-- To the right -->
+ 
+  <!-- Default to the left -->
+  <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+</div>
+{% include '/based/js.html' %}
+</body>
+</html>
