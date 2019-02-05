@@ -2,7 +2,15 @@ import os, json
 import MySQLdb as mysql
 import sys
 
+<<<<<<< HEAD
 
+=======
+try:
+    con = mysql.connect('adminupz.mysql.pythonanywhere-services.com', 'adminupz', 'ALFIAN123', 'adminupz$TA')
+except Exception as e:
+    print "Error %d: %s" % (e.args[0],e.args[1])
+    # sys.exit(1)
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
 
 
 BASE = os.path.dirname(os.path.realpath(__file__))

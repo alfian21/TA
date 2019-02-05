@@ -44,7 +44,7 @@ def admin_session(f):
             flash('Your Session is time out, login first')
             return redirect(url_for('index'))
     return wrap
-    
+
 
 @app.route('/logout')
 def logout():
@@ -80,7 +80,7 @@ def imdata():
     if request.method == 'POST':
         file = request.files['file-input']
         if file and allowed_file_import(file.filename):
-            #simpan file baru 
+            #simpan file baru
             filename=secure_filename(file.filename)
             path = os.path.join(IMPORT_FOLDER,filename)
             file.save(path)
@@ -105,7 +105,7 @@ def imdata():
                             return redirect(url_for('save_test'))
                     else:
                         flash("Format file yang anda upload salah,tidak ditemukan sheet dengan nama : Daftar Mustahik","error")
-                       
+
             except Exception as e:
                  print e
             #hapusfile(IMPORT_FOLDER, filename)
@@ -130,7 +130,7 @@ def importdata(booksheet):
     x5_max = 18.0
     x6_min = 1000000.0
     x6_max = 2500000.0
-    
+
     #create a loop to iterate through each row in the XLS file
     for r in range(5, booksheet.nrows):
         try:
@@ -141,7 +141,7 @@ def importdata(booksheet):
             d = float(booksheet.cell(r,5).value,)
             e = float(booksheet.cell(r,6).value,)
             f = float(booksheet.cell(r,7).value,)
-           
+
             c1= "1" if booksheet.cell(r,8).value == "YA" else "0",
             c2= "1" if booksheet.cell(r,8).value == "TIDAK" else "0",
             x1= (float(a) - x1_min) / (x1_max-x1_min)
@@ -150,18 +150,18 @@ def importdata(booksheet):
             x4= (x4_max - float(d)) / (x4_max-x4_min)
             x5= (x5_max - float(e)) / (x5_max-x5_min)
             x6= (x6_max - float(f)) / (x6_max-x6_min)
-           
-            
+
+
             cursor.execute(query,(str(id_test),nama_mustahik,str(x1),str(x2),str(x3),str(x4),str(x5),str(x6),c1,c2,str(a),str(b),str(c),str(d),str(e),str(f) ))
             cc.commit()
-            
+
             jml_input += 1
-           
+
         except Exception as e:
             print e
             print jml_input
     flash(""+str(jml_input)+" Data Mustahik Berhasil Disimpan", "success")
- 
+
 
 
 
@@ -183,7 +183,7 @@ def save_test():
         try:
             cursor.execute(query,(nama,i,i,i))
             c.commit()
-           
+
             query = "SELECT * from tbl_test WHERE nama_test = '%s'" %(nama)
             cursor.execute(query)
             data = cursor.fetchall()
@@ -200,8 +200,8 @@ def save_test():
                     else:
                         print "session null"
                         return redirect(url_for('save_test'))
-                        
-                   
+
+
             return redirect(url_for('imdata'))
 
         except Exception as e:
@@ -223,9 +223,9 @@ def view_data_latih_asli():
     cursor.execute(qu)
     cc.commit()
     post = cursor.fetchall()
-    
+
     return render_template('/data_latih_asli.html', post=post)
-   
+
 @app.route('/tambah_data_latih_asli', methods=['POST','GET'])
 @admin_session
 @read_session
@@ -256,7 +256,7 @@ def tambah_data_latih_asli():
             x5_max = 18.0
             x6_min = 1000000.0
             x6_max = 2500000.0
-        
+
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             x3= (float(c) - x3_min) / (x3_max-x3_min)
@@ -278,7 +278,7 @@ def tambah_data_latih_asli():
     except Exception as e:
         print e
     return redirect(url_for('view_data_latih_asli'))
-   
+
 
 
 @app.route('/edit_data_latih_asli/<id>', methods=['POST','GET'])
@@ -311,7 +311,7 @@ def edit_data_latih_asli(id):
             x5_max = 18.0
             x6_min = 1000000.0
             x6_max = 2500000.0
-        
+
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             x3= (float(c) - x3_min) / (x3_max-x3_min)
@@ -325,7 +325,7 @@ def edit_data_latih_asli(id):
                 c1="0"
                 c2="1"
             stts=0
-            query = "Update tbl_mustahik set x1=%s,x2=%s,x3=%s,x4=%s,x5=%s,x6=%s,c1=%s,c2=%s,stts=%s,k1=%s,k2=%s,k3=%s,k4=%s,k5=%s,k6=%s where id_mustahik = %s"            
+            query = "Update tbl_mustahik set x1=%s,x2=%s,x3=%s,x4=%s,x5=%s,x6=%s,c1=%s,c2=%s,stts=%s,k1=%s,k2=%s,k3=%s,k4=%s,k5=%s,k6=%s where id_mustahik = %s"
             print a,b,c,d,e,f, cc
             print x1,x2,x3,x4,x5,x6,c1,c2
             cursor.execute(query,(str(x1),str(x2),str(x3),str(x4),str(x5),str(x6),c1,c2,stts,a,b,c,d,e,f, id))
@@ -333,7 +333,7 @@ def edit_data_latih_asli(id):
     except Exception as e:
         print e
     return redirect(url_for('view_data_latih_asli'))
-   
+
 
 @app.route('/delete_data_latih_asli/<id>', methods=['POST','GET'])
 @admin_session
@@ -380,7 +380,7 @@ def count_data():
             data = cursor.fetchall()
             for i in data:
                 count_data = i[0]
-        
+
         except Exception as e:
             print e
 
@@ -397,7 +397,7 @@ def count_data():
         hitung_fcm(x, iterasi_input, error_input, w_input)
         return redirect(url_for('view_result'))
     return render_template('/data_latih.html', post=post)
-   
+
 
 
 @read_session
@@ -410,7 +410,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
-        #initial list 
+        #initial list
         att = [1,2,3,4,5,6]
         cluster = [1,2]
         w = int(w_input)
@@ -420,11 +420,16 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
         j = 0
         i = 0
         po = 0
-       
+
         it = 1
         miu = x
+<<<<<<< HEAD
         
         #g.convert tuple to numpy array
+=======
+
+        #convert tuple to numpy array
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -443,7 +448,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 miu2 = np.power(miu,w)
                 #g.convert numpy to list
                 list_miu2 = miu2.tolist()
-                #initial a list 
+                #initial a list
                 s=[[] for i in range(len(list_mus))]
                 ss=[[] for i in range(len(att))]
                 print "========================================="
@@ -456,14 +461,14 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 b = np.asarray(list_miu2)
                 # print len(b)
                 print b
-                
-               
+
+
                 #procces
                 for i in range(len(list_mus)):
                     for k in range(len(cluster)):
                         for j in range(len(att)):
                             s[i].append(list_mus[i][j] * list_miu2[i][k])
-                    #         j=j+1    
+                    #         j=j+1
                     #     k+=1
                     # i+=1
                 #back to numpy
@@ -480,7 +485,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 print " Sum Miu^2"
                 print "========================================="
                 print vmiu
-                
+
                 vkj = []
                 for i in range(len(vmiu)):
                     for j in range(len(vx)):
@@ -490,13 +495,13 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                            vkj.append(vx[j] / vmiu[i])
                 cc = np.asarray(vkj)
                 new_vkj = cc.reshape(2,6)
-            
+
                 print "========================================="
                 print "Pusat Cluster"
                 print "========================================="
                 ccc = np.asarray(new_vkj)
                 print ccc
-                
+
                 p=[[] for i in range(len(list_mus))]
 
                 for i in range(len(list_mus)):
@@ -504,7 +509,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                         for k in range(len(att)):
                             #proses data dikurangi pusat cluster di kuadratkan
                             p[i].append(pow(list_mus[i][k] - new_vkj[j][k], 2))
-    
+
                 aa = len(list_mus*2)
                 pp = np.asarray(p)
                 ppp = pp.reshape(aa,6)
@@ -537,7 +542,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 for i in range(len(list_mus)):
                     for j in range(len(cluster)):
                         new_miu[i].append(sum_p2[i][j] / lt[i])
-                
+
                 new_miu_2 = np.asarray(new_miu)
                 print "========================================="
                 print "\n Pembaruan Miu"
@@ -559,7 +564,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
         max_iterasi =len(p_objecktif)
         print max_iterasi
         c_hasil = np.around(miu,0)
-        
+
         vtvt = ccc.reshape(1,12)
         print vtvt
 
@@ -584,7 +589,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
         query = "UPDATE tbl_test SET max_iterasi = %s, error = %s, sukses=%s, pangkat =%s where id_test = %s"
         cursor.execute(query,((max_iterasi - 1), error,persen, w,  id_test))
         c.commit()
-        
+
         #save pusat Cluster
         q = "select * from tbl_cluster where id_test=%s" %(id_test)
         cursor.execute(q)
@@ -623,7 +628,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 jml+=1
             print jml, "save done"
         elif data1 != ():
-            
+
             for i in range(len(list_mus)):
                 id_mus = data[i]
                 id_h_mus = data1[i]
@@ -635,11 +640,11 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                     query = "update tbl_hasil set h_c1 =%s, h_c2=%s, miu1=%s, miu2=%s where id_mustahik = %s"
                     cursor.execute(query,( c1,c2,m1, m2, id_mus))
                     c.commit()
-                
+
                     jml+=1
             print jml, "update done"
 
-            
+
     except Exception as e:
         print e
 
@@ -708,7 +713,7 @@ def e_test(id_test):
         qu= "select * from tbl_mustahik where id_test = '%s' and stts='0' " %(id_test)
         cursor.execute(qu)
         post = cursor.fetchall()
-        
+
     return render_template('/data_latih_asli.html', post = post)
 
 
@@ -739,7 +744,7 @@ def imdata_uji():
     if request.method == 'POST':
         file = request.files['file-input']
         if file and allowed_file_import(file.filename):
-            #simpan file baru 
+            #simpan file baru
             filename=secure_filename(file.filename)
             path = os.path.join(IMPORT_FOLDER,filename)
             file.save(path)
@@ -776,7 +781,7 @@ def imdata_uji():
                                 importdata_uji(sheet)
                                 id = session['id']
                                 return redirect(url_for('view_data_uji_asli'))
-                              
+
                                 flash("Format file yang anda upload sesuai","succes")
                         else:
                             print "format tidak sesuai"
@@ -785,10 +790,10 @@ def imdata_uji():
                     else:
                         flash("Format file yang anda upload salah,tidak ditemukan sheet dengan nama : Daftar Mustahik Uji","error")
 
-                        
+
             except Exception as e:
                 print e
-                
+
             #hapusfile(IMPORT_FOLDER, filename)
     return render_template('/importdatauji.html', post = data)
 
@@ -825,17 +830,17 @@ def importdata_uji(booksheet):
             c1= "1" if booksheet.cell(r,8).value == "YA" else "0",
             c2= "1" if booksheet.cell(r,8).value == "TIDAK" else "0",
             status = 1
-            
+
             cursor.execute(query,(id_test,nama_mustahik,x1,x2,x3,x4,x5,x6,c1,c2,status,booksheet.cell(r,2).value,booksheet.cell(r,3).value,booksheet.cell(r,4).value,booksheet.cell(r,5).value,booksheet.cell(r,6).value,booksheet.cell(r,7).value))
             c.commit()
-            
+
             jml_input += 1
-           
+
         except Exception as e:
             print e
             print jml_input
     flash(""+str(jml_input)+" Data Uji Mustahik Berhasil Disimpan", "success")
- 
+
 @app.route('/view_data_uji_asli', methods=['POST','GET'])
 @admin_session
 @read_session
@@ -885,7 +890,7 @@ def tambah_data_uji_asli():
             x5_max = 18.0
             x6_min = 1000000.0
             x6_max = 2500000.0
-        
+
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             x3= (float(c) - x3_min) / (x3_max-x3_min)
@@ -907,7 +912,7 @@ def tambah_data_uji_asli():
     except Exception as e:
         print e
     return redirect(url_for('view_data_uji_asli'))
-   
+
 
 
 @app.route('/edit_data_uji_asli/<id>', methods=['POST','GET'])
@@ -940,7 +945,7 @@ def edit_data_uji_asli(id):
             x5_max = 18.0
             x6_min = 1000000.0
             x6_max = 2500000.0
-        
+
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             x3= (float(c) - x3_min) / (x3_max-x3_min)
@@ -954,7 +959,7 @@ def edit_data_uji_asli(id):
                 c1="0"
                 c2="1"
             stts=1
-            query = "Update tbl_mustahik set x1=%s,x2=%s,x3=%s,x4=%s,x5=%s,x6=%s,c1=%s,c2=%s,stts=%s,k1=%s,k2=%s,k3=%s,k4=%s,k5=%s,k6=%s where id_mustahik = %s"            
+            query = "Update tbl_mustahik set x1=%s,x2=%s,x3=%s,x4=%s,x5=%s,x6=%s,c1=%s,c2=%s,stts=%s,k1=%s,k2=%s,k3=%s,k4=%s,k5=%s,k6=%s where id_mustahik = %s"
             print a,b,c,d,e,f, cc
             print x1,x2,x3,x4,x5,x6,c1,c2
             cursor.execute(query,(str(x1),str(x2),str(x3),str(x4),str(x5),str(x6),c1,c2,stts,a,b,c,d,e,f, id))
@@ -962,7 +967,7 @@ def edit_data_uji_asli(id):
     except Exception as e:
         print e
     return redirect(url_for('view_data_uji_asli'))
-   
+
 
 @app.route('/delete_data_uji_asli/<id>', methods=['POST','GET'])
 @admin_session
@@ -1019,7 +1024,7 @@ def count_data_uji():
                     data = cursor.fetchall()
                     for i in data:
                         count_data = i[0]
-                
+
                 except Exception as e:
                     print e
 
@@ -1032,14 +1037,14 @@ def count_data_uji():
                 x = np.around(miu,n_rounded)
 
                 #select pusat cluster data latih
-                sql="select v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 from tbl_cluster where id_test = '%s' " %(id_test)  
+                sql="select v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 from tbl_cluster where id_test = '%s' " %(id_test)
                 cursor.execute(sql)
-                miu = cursor.fetchall()  
+                miu = cursor.fetchall()
                 bts = np.asarray(miu)
-                list_bts = []                
+                list_bts = []
                 for i in range(1):
                     list_bts.insert(i, bts[i])
-                
+
                 np_v = np.asarray(list_bts)
                 vkj = np_v.reshape(2,6)
                 print vkj
@@ -1047,7 +1052,7 @@ def count_data_uji():
                 return redirect(url_for('view_result_uji'))
         except Exception as e:
             print e
-       
+
     return render_template('/data_uji.html',post1=post1,post2=post2, post3=post3, post = post)
 
 
@@ -1062,7 +1067,7 @@ def p_cluster_uji(x, vkj):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
-        #initial list 
+        #initial list
         att = [1,2,3,4,5,6]
         cluster = [1,2]
         qu = " select pangkat from tbl_test where id_test=%s" %(id_test)
@@ -1074,10 +1079,15 @@ def p_cluster_uji(x, vkj):
         j = 0
         i = 0
         po = 0
-        
+
         miu = x
+<<<<<<< HEAD
         
         #g.convert tuple to numpy array
+=======
+
+        #convert tuple to numpy array
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1090,7 +1100,7 @@ def p_cluster_uji(x, vkj):
         miu2 = np.power(miu,w)
         #g.convert numpy to list
         list_miu2 = miu2.tolist()
-        #initial a list 
+        #initial a list
         s=[[] for i in range(len(list_mus))]
         ss=[[] for i in range(len(att))]
         print "========================================="
@@ -1103,14 +1113,14 @@ def p_cluster_uji(x, vkj):
         b = np.asarray(list_miu2)
         # print len(b)
         print b
-        
-        
+
+
         #procces
         for i in range(len(list_mus)):
             for k in range(len(cluster)):
                 for j in range(len(att)):
                     s[i].append(list_mus[i][j] * list_miu2[i][k])
-            #         j=j+1    
+            #         j=j+1
             #     k+=1
             # i+=1
         #back to numpy
@@ -1137,7 +1147,7 @@ def p_cluster_uji(x, vkj):
         print "========================================="
         print "Hasil F objektif per Cluster"
         print "========================================="
-         
+
         p=[[] for i in range(len(list_mus))]
 
         for i in range(len(list_mus)):
@@ -1175,7 +1185,7 @@ def p_cluster_uji(x, vkj):
         for i in range(len(list_mus)):
             for j in range(len(cluster)):
                 new_miu[i].append(sum_p2[i][j] / lt[i])
-        
+
         new_miu_2 = np.asarray(new_miu)
         print "========================================="
         print "\n Pembaruan Miu"
@@ -1212,7 +1222,7 @@ def p_cluster_uji(x, vkj):
         query = "UPDATE tbl_test SET  error_uji = %s, sukses_uji=%s where id_test = %s"
         cursor.execute(query,(error,persen, id_test))
         c.commit()
-        
+
 
 
         #save cluster per mustahik
@@ -1234,7 +1244,7 @@ def p_cluster_uji(x, vkj):
                     c2=0
                 elif(c2>=c1):
                     c1=0
-                    c2=1            
+                    c2=1
                 m1 = miu[i][0]
                 m2 = miu[i][1]
                 query = "insert into tbl_hasil (id_mustahik, h_c1, h_c2, miu1, miu2) values (%s, %s, %s, %s, %s)"
@@ -1243,7 +1253,7 @@ def p_cluster_uji(x, vkj):
                 jml+=1
             print jml, "save done"
         elif data1 != ():
-            
+
             for i in range(len(list_mus)):
                 id_mus = data[i]
                 id_h_mus = data1[i]
@@ -1255,11 +1265,11 @@ def p_cluster_uji(x, vkj):
                     query = "update tbl_hasil set h_c1 =%s, h_c2=%s, miu1=%s, miu2=%s where id_mustahik = %s"
                     cursor.execute(query,( c1,c2,m1, m2, id_mus))
                     c.commit()
-                
+
                     jml+=1
             print jml, "update done"
 
-            
+
     except Exception as e:
         print e
 
@@ -1339,7 +1349,7 @@ def imdata_weka():
     if request.method == 'POST':
         file = request.files['file-input']
         if file and allowed_file_import(file.filename):
-            #simpan file baru 
+            #simpan file baru
             filename=secure_filename(file.filename)
             path = os.path.join(IMPORT_FOLDER,filename)
             file.save(path)
@@ -1364,7 +1374,7 @@ def imdata_weka():
                             return redirect(url_for('save_test_weka'))
                     else:
                         flash("Format file yang anda upload salah,tidak ditemukan sheet dengan nama : Daftar Mustahik Weka","error")
-                       
+
             except Exception as e:
                  print e
             #hapusfile(IMPORT_FOLDER, filename)
@@ -1392,17 +1402,17 @@ def importdata_weka(booksheet):
 
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
-            
+
             cursor.execute(query,(str(id_test),nama_mustahik, str(x1),str(x2),c1,c2,str(a),str(b)))
             c.commit()
-            
+
             jml_input += 1
-           
+
         except Exception as e:
             print e
             print jml_input
     flash(""+str(jml_input)+" Data Mustahik Berhasil Disimpan", "success")
- 
+
 
 
 
@@ -1424,7 +1434,7 @@ def save_test_weka():
         try:
             cursor.execute(query,(nama,i,i,j))
             c.commit()
-           
+
             query = "SELECT * from tbl_test WHERE nama_test = '%s'" %(nama)
             cursor.execute(query)
             data = cursor.fetchall()
@@ -1441,8 +1451,8 @@ def save_test_weka():
                     else:
                         print "session null"
                         return redirect(url_for('save_test_weka'))
-                        
-                   
+
+
             return redirect(url_for('imdata_weka'))
 
         except Exception as e:
@@ -1466,7 +1476,7 @@ def view_data_latih_asli_weka():
     cc.commit()
     post = cursor.fetchall()
     return render_template('/weka/data_asli_weka.html', post=post)
-   
+
 @app.route('/tambah_data_latih_asli_weka', methods=['POST','GET'])
 @admin_session
 @read_session_weka
@@ -1484,8 +1494,13 @@ def tambah_data_latih_asli_weka():
             x1_min = 27.0
             x1_max = 80.0
             x2_min = 450000.0
+<<<<<<< HEAD
+            x2_max = 3200000.0
+
+=======
             x2_max = 5000000.0
         
+>>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -1503,7 +1518,7 @@ def tambah_data_latih_asli_weka():
     except Exception as e:
         print e
     return redirect(url_for('view_data_latih_asli_weka'))
-   
+
 
 
 @app.route('/edit_data_latih_asli_weka/<id>', methods=['POST','GET'])
@@ -1522,9 +1537,15 @@ def edit_data_latih_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
+<<<<<<< HEAD
+            x2_min = 700000.0
+            x2_max = 3200000.0
+
+=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
+>>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -1534,7 +1555,7 @@ def edit_data_latih_asli_weka(id):
                 c1="0"
                 c2="1"
             stts=0
-            query = "Update tbl_mustahik_weka set x1_weka=%s,x2_weka=%s,c1_weka=%s,c2_weka=%s,stts_weka=%s,k1_weka=%s,k2_weka=%s where id_mustahik_weka = %s"            
+            query = "Update tbl_mustahik_weka set x1_weka=%s,x2_weka=%s,c1_weka=%s,c2_weka=%s,stts_weka=%s,k1_weka=%s,k2_weka=%s where id_mustahik_weka = %s"
             print a,b, cc
             print x1,x2,c1,c2
             cursor.execute(query,(str(x1),str(x2),c1,c2,stts,a,b, id))
@@ -1542,7 +1563,7 @@ def edit_data_latih_asli_weka(id):
     except Exception as e:
         print e
     return redirect(url_for('view_data_latih_asli_weka'))
-   
+
 
 @app.route('/delete_data_latih_asli_weka/<id>', methods=['POST','GET'])
 @admin_session
@@ -1586,7 +1607,7 @@ def count_data_weka():
             data = cursor.fetchall()
             for i in data:
                 count_data = i[0]
-        
+
         except Exception as e:
             print e
 
@@ -1603,7 +1624,7 @@ def count_data_weka():
         p_cluster_weka(x, iterasi_input, error_input, w_input)
         return redirect(url_for('view_result_weka'))
     return render_template('/weka/data_latih_weka.html', post=post)
-   
+
 
 
 @read_session_weka
@@ -1616,7 +1637,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
-        #initial list 
+        #initial list
         att = [1,2]
         cluster = [1,2]
         k = 0
@@ -1628,8 +1649,13 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
         error = float(error_input)
         it = 1
         miu = x
+<<<<<<< HEAD
         
         #g.convert tuple to numpy array
+=======
+
+        #convert tuple to numpy array
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1648,7 +1674,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 miu2 = np.power(miu,w)
                 #g.convert numpy to list
                 list_miu2 = miu2.tolist()
-                #initial a list 
+                #initial a list
                 s=[[] for i in range(len(list_mus))]
                 ss=[[] for i in range(len(att))]
                 print "========================================="
@@ -1661,14 +1687,14 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 b = np.asarray(list_miu2)
                 # print len(b)
                 print b
-                
-               
+
+
                 #procces
                 for i in range(len(list_mus)):
                     for k in range(len(cluster)):
                         for j in range(len(att)):
                             s[i].append(list_mus[i][j] * list_miu2[i][k])
-                    #         j=j+1    
+                    #         j=j+1
                     #     k+=1
                     # i+=1
                 #back to numpy
@@ -1685,7 +1711,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 print " Sum Miu^2"
                 print "========================================="
                 print vmiu
-                
+
                 vkj = []
                 for i in range(len(vmiu)):
                     for j in range(len(vx)):
@@ -1695,13 +1721,13 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                            vkj.append(vx[j] / vmiu[i])
                 cc = np.asarray(vkj)
                 new_vkj = cc.reshape(2,2)
-            
+
                 print "========================================="
                 print "Pusat Cluster"
                 print "========================================="
                 ccc = np.asarray(new_vkj)
                 print ccc
-                
+
                 p=[[] for i in range(len(list_mus))]
 
                 for i in range(len(list_mus)):
@@ -1709,7 +1735,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                         for k in range(len(att)):
                             #proses data dikurangi pusat cluster di kuadratkan
                             p[i].append(pow(list_mus[i][k] - new_vkj[j][k], 2))
-    
+
                 aa = len(list_mus*2)
                 pp = np.asarray(p)
                 ppp = pp.reshape(aa,2)
@@ -1742,7 +1768,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 for i in range(len(list_mus)):
                     for j in range(len(cluster)):
                         new_miu[i].append(sum_p2[i][j] / lt[i])
-                
+
                 new_miu_2 = np.asarray(new_miu)
                 print "========================================="
                 print "\n Pembaruan Miu"
@@ -1784,7 +1810,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
         query = "UPDATE tbl_test SET max_iterasi = %s, error = %s, sukses=%s, pangkat=%s where id_test = %s"
         cursor.execute(query,((max_iterasi - 1), error,persen, w, id_test))
         c.commit()
-        
+
         #save pusat Cluster
         q = "select * from tbl_cluster where id_test=%s" %(id_test)
         cursor.execute(q)
@@ -1827,7 +1853,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 jml+=1
             print jml, "save done"
         elif data1 != ():
-            
+
             for i in range(len(list_mus)):
                 id_mus = data[i]
                 id_h_mus = data1[i]
@@ -1839,11 +1865,11 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                     query = "update tbl_hasil_weka set h_c1_weka =%s, h_c2_weka=%s, miu1_weka=%s, miu2_weka=%s where id_mustahik_weka = %s"
                     cursor.execute(query,( c1,c2,m1, m2, id_mus))
                     c.commit()
-                
+
                     jml+=1
             print jml, "update done"
 
-            
+
     except Exception as e:
         print e
 
@@ -1906,7 +1932,7 @@ def e_test_weka(id_test):
         qu= "select * from tbl_mustahik_weka where id_test = '%s' and stts_weka='0' " %(id_test)
         cursor.execute(qu)
         post = cursor.fetchall()
-        
+
     return render_template('/weka/data_asli_weka.html', post = post)
 
 
@@ -1925,7 +1951,7 @@ def imdata_uji_weka():
     if request.method == 'POST':
         file = request.files['file-input']
         if file and allowed_file_import(file.filename):
-            #simpan file baru 
+            #simpan file baru
             filename=secure_filename(file.filename)
             path = os.path.join(IMPORT_FOLDER,filename)
             file.save(path)
@@ -1970,11 +1996,11 @@ def imdata_uji_weka():
                     else:
                         flash("Format file yang anda upload salah,tidak ditemukan sheet dengan nama : Daftar Mustahik Uji Weka","error")
 
-                        
+
             except Exception as e:
                 print e
                 flash(e, "error")
-                
+
             #hapusfile(IMPORT_FOLDER, filename)
     return render_template('/weka/importdatauji_weka.html', post = data)
 
@@ -2004,9 +2030,9 @@ def importdata_uji_weka(booksheet):
             stts = 1
             cursor.execute(query,(str(id_test),nama_mustahik, str(x1),str(x2),c1,c2,stts,str(a),str(b)))
             c.commit()
-            
+
             jml_input += 1
-           
+
         except Exception as e:
             print e
             print jml_input
@@ -2026,7 +2052,7 @@ def view_data_uji_asli_weka():
     cc.commit()
     post = cursor.fetchall()
     return render_template('/weka/data_asli_uji_weka.html', post=post)
-   
+
 @app.route('/tambah_data_uji_asli_weka', methods=['POST','GET'])
 @admin_session
 @read_session_weka
@@ -2043,9 +2069,15 @@ def tambah_data_uji_asli_weka():
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
+<<<<<<< HEAD
+            x2_min = 0.0
+            x2_max = 3200000.0
+
+=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
+>>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -2063,7 +2095,7 @@ def tambah_data_uji_asli_weka():
     except Exception as e:
         print e
     return redirect(url_for('view_data_uji_asli_weka'))
-   
+
 
 
 @app.route('/edit_data_uji_asli_weka/<id>', methods=['POST','GET'])
@@ -2082,9 +2114,15 @@ def edit_data_uji_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
+<<<<<<< HEAD
+            x2_min = 700000.0
+            x2_max = 3200000.0
+
+=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
+>>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -2094,7 +2132,7 @@ def edit_data_uji_asli_weka(id):
                 c1="0"
                 c2="1"
             stts=1
-            query = "Update tbl_mustahik_weka set x1_weka=%s,x2_weka=%s,c1_weka=%s,c2_weka=%s,stts_weka=%s,k1_weka=%s,k2_weka=%s where id_mustahik_weka = %s"            
+            query = "Update tbl_mustahik_weka set x1_weka=%s,x2_weka=%s,c1_weka=%s,c2_weka=%s,stts_weka=%s,k1_weka=%s,k2_weka=%s where id_mustahik_weka = %s"
             print a,b, cc
             print x1,x2,c1,c2
             cursor.execute(query,(str(x1),str(x2),c1,c2,stts,a,b, id))
@@ -2102,7 +2140,7 @@ def edit_data_uji_asli_weka(id):
     except Exception as e:
         print e
     return redirect(url_for('view_data_uji_asli_weka'))
-   
+
 
 @app.route('/delete_data_uji_asli_weka/<id>', methods=['POST','GET'])
 @admin_session
@@ -2140,7 +2178,7 @@ def count_data_uji_weka():
     qu3= "select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 from tbl_test inner join tbl_cluster on tbl_test.id_test = tbl_cluster.id_test where tbl_test.id_test = '%s' " %(id_test)
     cursor.execute(qu3)
     post3 = cursor.fetchall()
- 
+
 
     qu= "select * from tbl_mustahik_weka where id_test = '%s' and stts_weka='1' " %(id_test)
     cursor.execute(qu)
@@ -2156,7 +2194,7 @@ def count_data_uji_weka():
                     data = cursor.fetchall()
                     for i in data:
                         count_data = i[0]
-                
+
                 except Exception as e:
                     print e
 
@@ -2169,14 +2207,14 @@ def count_data_uji_weka():
                 x = np.around(miu,n_rounded)
 
                 #select pusat cluster data latih
-                sql="select v1,v2,v3,v4 from tbl_cluster where id_test = '%s' " %(id_test)  
+                sql="select v1,v2,v3,v4 from tbl_cluster where id_test = '%s' " %(id_test)
                 cursor.execute(sql)
-                miu = cursor.fetchall()  
+                miu = cursor.fetchall()
                 bts = np.asarray(miu)
-                list_bts = []                
+                list_bts = []
                 for i in range(1):
                     list_bts.insert(i, bts[i])
-                
+
                 np_v = np.asarray(list_bts)
                 vkj = np_v.reshape(2,2)
                 print vkj
@@ -2185,7 +2223,7 @@ def count_data_uji_weka():
 
         except Exception as e:
             print e
-       
+
     return render_template('/weka/data_uji_weka.html',post1=post1,post2=post2, post3=post3, post = post)
 
 
@@ -2200,7 +2238,7 @@ def p_cluster_uji_weka(x, vkj):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
-        #initial list 
+        #initial list
         att = [1,2]
         cluster = [1,2]
         w = 2
@@ -2208,10 +2246,15 @@ def p_cluster_uji_weka(x, vkj):
         j = 0
         i = 0
         po = 0
-        
+
         miu = x
+<<<<<<< HEAD
         
         #g.convert tuple to numpy array
+=======
+
+        #convert tuple to numpy array
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -2224,7 +2267,7 @@ def p_cluster_uji_weka(x, vkj):
         miu2 = np.power(miu,w)
         #g.convert numpy to list
         list_miu2 = miu2.tolist()
-        #initial a list 
+        #initial a list
         s=[[] for i in range(len(list_mus))]
         ss=[[] for i in range(len(att))]
         print "========================================="
@@ -2237,14 +2280,14 @@ def p_cluster_uji_weka(x, vkj):
         b = np.asarray(list_miu2)
         # print len(b)
         print b
-        
-        
+
+
         #procces
         for i in range(len(list_mus)):
             for k in range(len(cluster)):
                 for j in range(len(att)):
                     s[i].append(list_mus[i][j] * list_miu2[i][k])
-            #         j=j+1    
+            #         j=j+1
             #     k+=1
             # i+=1
         #back to numpy
@@ -2261,15 +2304,15 @@ def p_cluster_uji_weka(x, vkj):
         print " Sum Miu^2"
         print "========================================="
         print vmiu
-       
+
         new_vkj = vkj
-    
+
         print "========================================="
         print "Pusat Cluster"
         print "========================================="
         ccc = np.asarray(new_vkj)
         print ccc
-        
+
         p=[[] for i in range(len(list_mus))]
 
         for i in range(len(list_mus)):
@@ -2310,7 +2353,7 @@ def p_cluster_uji_weka(x, vkj):
         for i in range(len(list_mus)):
             for j in range(len(cluster)):
                 new_miu[i].append(sum_p2[i][j] / lt[i])
-        
+
         new_miu_2 = np.asarray(new_miu)
         print "========================================="
         print "\n Pembaruan Miu"
@@ -2347,7 +2390,7 @@ def p_cluster_uji_weka(x, vkj):
         query = "UPDATE tbl_test SET  error_uji = %s, sukses_uji=%s where id_test = %s"
         cursor.execute(query,(error,persen, id_test))
         c.commit()
-        
+
 
 
         #save cluster per mustahik
@@ -2383,11 +2426,11 @@ def p_cluster_uji_weka(x, vkj):
                     query = "update tbl_hasil_weka set h_c1_weka =%s, h_c2_weka=%s, miu1_weka=%s, miu2_weka=%s where id_mustahik_weka = %s"
                     cursor.execute(query,( c1,c2,m1, m2, id_mus))
                     c.commit()
-                
+
                     jml+=1
             print jml, "update done"
 
-            
+
     except Exception as e:
         print e
 
@@ -2448,8 +2491,13 @@ def delete_test_weka(id_test):
 #laporan
 @app.route('/laporan', methods=['GET', 'POST'])
 @read_session
+<<<<<<< HEAD
 def laporan():  
     c = g.con
+=======
+def laporan():
+    c = con
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts=0,1,null))'jumlah_latih',count(if(stts=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik on tbl_test.id_test = tbl_mustahik.id_test where status_test='0' group by id_test"
     cursor.execute(query)
@@ -2458,8 +2506,13 @@ def laporan():
 
 @app.route('/laporan_weka', methods=['GET', 'POST'])
 @read_session_weka
+<<<<<<< HEAD
 def laporan_weka():  
     c = g.con
+=======
+def laporan_weka():
+    c = con
+>>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts_weka=0,1,null))'jumlah_latih',count(if(stts_weka=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik_weka on tbl_test.id_test = tbl_mustahik_weka.id_test where status_test='1' group by id_test"
     cursor.execute(query)
@@ -2469,7 +2522,7 @@ def laporan_weka():
 
 @app.route('/laporan_data/<id>', methods=['GET', 'POST'])
 @read_session
-def laporan_data(id):  
+def laporan_data(id):
     id=id
     c = g.con
     cursor = c.cursor()
@@ -2499,11 +2552,11 @@ def laporan_data(id):
         page = render_template('laporan/lap_data.html',post1=post1, post=post, waktu=waktu, logo=logo)
         pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik.pdf"), options=options)
         return send_file(os.path.join(LAPORAN_FOLDER, "data_mustahik.pdf"), mimetype='application/pdf')
-   
+
 
 @app.route('/laporan_data_weka/<id>', methods=['GET', 'POST'])
 @read_session_weka
-def laporan_data_weka(id):  
+def laporan_data_weka(id):
     options = {
         'page-size': 'A4',
         'margin-top': '0.5in',
@@ -2526,4 +2579,4 @@ def laporan_data_weka(id):
     page = render_template('laporan/laporan_data_weka.html',post1=post1, post=post, waktu=waktu, logo=logo)
     pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik_weka.pdf"), options=options)
     return send_file(os.path.join(LAPORAN_FOLDER, "data_mustahik_weka.pdf"), mimetype='application/pdf')
-    
+
