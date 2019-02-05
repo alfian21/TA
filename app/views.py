@@ -1,7 +1,7 @@
-from flask import Flask, Response, request, render_template, url_for, redirect, flash, session, send_file
+from flask import g,Flask, Response, request, render_template, url_for, redirect, flash, session, send_file
 from functools import wraps
 from app import *
-from config import IMPORT_FOLDER, allowed_file_import, con
+from config import IMPORT_FOLDER, allowed_file_import
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
@@ -115,7 +115,7 @@ def imdata():
 def importdata(booksheet):
     query = "INSERT INTO tbl_mustahik (id_test,nama_mustahik,x1,x2,x3,x4,x5,x6,c1,c2,k1,k2,k3,k4,k5,k6) VALUE (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     jml_input = 0
-    cc = con
+    cc = g.con
     cursor = cc.cursor()
     id_test = session['id']
     x1_min = 27.0
@@ -168,7 +168,7 @@ def importdata(booksheet):
 @app.route('/save_test', methods=['POST','GET'])
 @admin_session
 def save_test():
-    c = con
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts=0,1,null))'jumlah_latih',count(if(stts=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik on tbl_test.id_test = tbl_mustahik.id_test where status_test='0' group by id_test"
     cursor.execute(query)
@@ -177,7 +177,7 @@ def save_test():
         nama = request.form['name']
         i = 0
         query = "INSERT INTO tbl_test (nama_test,max_iterasi, error, status_test) VALUES (%s,%s,%s,%s)"
-        c = con
+        c = g.con
         cursor = c.cursor()
         print nama
         try:
@@ -214,7 +214,7 @@ def save_test():
 @admin_session
 @read_session
 def view_data_latih_asli():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id']
     print session['id']
@@ -232,7 +232,7 @@ def view_data_latih_asli():
 def tambah_data_latih_asli():
     try:
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id']
             print session['id']
@@ -288,7 +288,7 @@ def edit_data_latih_asli(id):
     try:
         id =id
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id']
             print session['id']
@@ -340,7 +340,7 @@ def edit_data_latih_asli(id):
 @read_session
 def delete_data_latih_asli(id):
     if request.method == 'POST':
-        cc=con
+        cc=g.con
         cursor = cc.cursor()
         id=id
         print id
@@ -355,7 +355,7 @@ def delete_data_latih_asli(id):
 @admin_session
 @read_session
 def count_data():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id']
     print session['id']
@@ -367,7 +367,7 @@ def count_data():
 
 
     if request.method=='POST':
-        c = con
+        c = g.con
         cursor = c.cursor()
         id_test = session['id']
         w_input = request.form['w_input']
@@ -402,7 +402,7 @@ def count_data():
 
 @read_session
 def hitung_fcm(x, iterasi_input, error_input, w_input):
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id']
     #print id_test
@@ -424,7 +424,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
         it = 1
         miu = x
         
-        #convert tuple to numpy array
+        #g.convert tuple to numpy array
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -441,7 +441,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
                 print "Iterasi ke-",it
                 #mengkuadratkan numpy X ^ w
                 miu2 = np.power(miu,w)
-                #convert numpy to list
+                #g.convert numpy to list
                 list_miu2 = miu2.tolist()
                 #initial a list 
                 s=[[] for i in range(len(list_mus))]
@@ -650,7 +650,7 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
 def view_result():
     try:
         id_test = session['id']
-        c =con
+        c =g.con
         cursor = c.cursor()
         query = "SELECT * from all_hasil where id_test = '%s' and stts='0' " %(id_test)
         cursor.execute(query)
@@ -690,7 +690,7 @@ def view_result():
 @app.route('/e_test/<id_test>', methods=['POST','GET'])
 @read_session
 def e_test(id_test):
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     session['id'] = id_test
     print session['id']
@@ -715,7 +715,7 @@ def e_test(id_test):
 @app.route('/delete_test/<id_test>', methods=['POST','GET'])
 @read_session
 def delete_test(id_test):
-    cc=con
+    cc=g.con
     cursor= cc.cursor()
     if request.method=='POST':
         query = "delete from tbl_test where id_test =%s" %(id_test)
@@ -730,7 +730,7 @@ def delete_test(id_test):
 @admin_session
 def imdata_uji():
     id_test = session['id']
-    c = con
+    c = g.con
     cursor = c.cursor()
     query ="select * from tbl_test where id_test = %s" %(id_test)
     cursor.execute(query)
@@ -797,7 +797,7 @@ def imdata_uji():
 def importdata_uji(booksheet):
     query = "INSERT INTO tbl_mustahik (id_test,nama_mustahik, x1,x2,x3,x4,x5,x6,c1,c2, stts, k1, k2,k3, k4, k5, k6) VALUE (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     jml_input = 0
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id']
     x1_min = 27.0
@@ -840,7 +840,7 @@ def importdata_uji(booksheet):
 @admin_session
 @read_session
 def view_data_uji_asli():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id']
     print session['id']
@@ -861,7 +861,7 @@ def view_data_uji_asli():
 def tambah_data_uji_asli():
     try:
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id']
             print session['id']
@@ -917,7 +917,7 @@ def edit_data_uji_asli(id):
     try:
         id =id
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id']
             print session['id']
@@ -969,7 +969,7 @@ def edit_data_uji_asli(id):
 @read_session
 def delete_data_uji_asli(id):
     if request.method == 'POST':
-        cc=con
+        cc=g.con
         cursor = cc.cursor()
         id=id
         print id
@@ -985,7 +985,7 @@ def delete_data_uji_asli(id):
 @read_session
 @admin_session
 def count_data_uji():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test = session['id']
     print session['id']
@@ -1054,7 +1054,7 @@ def count_data_uji():
 
 @read_session
 def p_cluster_uji(x, vkj):
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id']
     #print id_test
@@ -1077,7 +1077,7 @@ def p_cluster_uji(x, vkj):
         
         miu = x
         
-        #convert tuple to numpy array
+        #g.convert tuple to numpy array
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1088,7 +1088,7 @@ def p_cluster_uji(x, vkj):
         print a
         #mengkuadratkan numpy X ^ w
         miu2 = np.power(miu,w)
-        #convert numpy to list
+        #g.convert numpy to list
         list_miu2 = miu2.tolist()
         #initial a list 
         s=[[] for i in range(len(list_mus))]
@@ -1269,7 +1269,7 @@ def p_cluster_uji(x, vkj):
 def view_result_uji():
     try:
         id_test = session['id']
-        c =con
+        c =g.con
         cursor = c.cursor()
         query = "SELECT * from all_hasil where id_test = '%s' and stts='1' " %(id_test)
         cursor.execute(query)
@@ -1374,7 +1374,7 @@ def imdata_weka():
 def importdata_weka(booksheet):
     query = "INSERT INTO tbl_mustahik_weka (id_test,nama_mustahik_weka, x1_weka,x2_weka,c1_weka,c2_weka,k1_weka,k2_weka) VALUE (%s,%s,%s,%s,%s,%s,%s,%s)"
     jml_input = 0
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id_weka']
     x1_min = 27.0
@@ -1408,7 +1408,7 @@ def importdata_weka(booksheet):
 
 @app.route('/save_test_weka', methods=['POST','GET'])
 def save_test_weka():
-    c = con
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts_weka=0,1,null))'jumlah_latih',count(if(stts_weka=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik_weka on tbl_test.id_test = tbl_mustahik_weka.id_test where status_test='1' group by id_test"
     cursor.execute(query)
@@ -1418,7 +1418,7 @@ def save_test_weka():
         i = 0
         j = 1
         query = "INSERT INTO tbl_test (nama_test,max_iterasi, error, status_test) VALUES (%s,%s,%s,%s)"
-        c = con
+        c = g.con
         cursor = c.cursor()
         print nama
         try:
@@ -1456,7 +1456,7 @@ def save_test_weka():
 @admin_session
 @read_session_weka
 def view_data_latih_asli_weka():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id_weka']
     print session['id_weka']
@@ -1473,7 +1473,7 @@ def view_data_latih_asli_weka():
 def tambah_data_latih_asli_weka():
     try:
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id_weka']
             print session['id_weka']
@@ -1513,7 +1513,7 @@ def edit_data_latih_asli_weka(id):
     try:
         id =id
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id_weka']
             print session['id_weka']
@@ -1549,7 +1549,7 @@ def edit_data_latih_asli_weka(id):
 @read_session_weka
 def delete_data_latih_asli_weka(id):
     if request.method == 'POST':
-        cc=con
+        cc=g.con
         cursor = cc.cursor()
         id=id
         print id
@@ -1564,7 +1564,7 @@ def delete_data_latih_asli_weka(id):
 @app.route('/count_data_weka', methods=['POST','GET'])
 @read_session_weka
 def count_data_weka():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id_weka']
     print session['id_weka']
@@ -1573,7 +1573,7 @@ def count_data_weka():
     cc.commit()
     post = cursor.fetchall()
     if request.method=='POST':
-        c = con
+        c = g.con
         cursor = c.cursor()
         id_test = session['id_weka']
         w_input = request.form['w_input']
@@ -1608,7 +1608,7 @@ def count_data_weka():
 
 @read_session_weka
 def p_cluster_weka(x, iterasi_input, error_input, w_input):
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id_weka']
     #print id_test
@@ -1629,7 +1629,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
         it = 1
         miu = x
         
-        #convert tuple to numpy array
+        #g.convert tuple to numpy array
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1646,7 +1646,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
                 print "Iterasi ke-",it
                 #mengkuadratkan numpy X ^ w
                 miu2 = np.power(miu,w)
-                #convert numpy to list
+                #g.convert numpy to list
                 list_miu2 = miu2.tolist()
                 #initial a list 
                 s=[[] for i in range(len(list_mus))]
@@ -1853,7 +1853,7 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
 def view_result_weka():
     try:
         id_test = session['id_weka']
-        c =con
+        c =g.con
         cursor = c.cursor()
         query = "SELECT * from all_hasil_weka where id_test = '%s' and stts_weka='0' " %(id_test)
         cursor.execute(query)
@@ -1888,7 +1888,7 @@ def view_result_weka():
 @app.route('/e_test_weka/<id_test>', methods=['POST','GET'])
 @read_session_weka
 def e_test_weka(id_test):
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     session['id_weka'] = id_test
     print session['id_weka']
@@ -1916,7 +1916,7 @@ def e_test_weka(id_test):
 @read_session_weka
 def imdata_uji_weka():
     id_test = session['id_weka']
-    c = con
+    c = g.con
     cursor = c.cursor()
     query ="select * from tbl_test where id_test = %s" %(id_test)
     cursor.execute(query)
@@ -1983,7 +1983,7 @@ def imdata_uji_weka():
 def importdata_uji_weka(booksheet):
     query = "INSERT INTO tbl_mustahik_weka (id_test,nama_mustahik_weka, x1_weka,x2_weka,c1_weka,c2_weka, stts_weka, k1_weka,k2_weka) VALUE (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     jml_input = 0
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id_weka']
     x1_min = 27.0
@@ -2016,7 +2016,7 @@ def importdata_uji_weka(booksheet):
 @admin_session
 @read_session_weka
 def view_data_uji_asli_weka():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test=session['id_weka']
     print session['id_weka']
@@ -2033,7 +2033,7 @@ def view_data_uji_asli_weka():
 def tambah_data_uji_asli_weka():
     try:
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id_weka']
             print session['id_weka']
@@ -2073,7 +2073,7 @@ def edit_data_uji_asli_weka(id):
     try:
         id =id
         if request.method=='POST':
-            ccc=con
+            ccc=g.con
             cursor = ccc.cursor()
             id_test=session['id_weka']
             print session['id_weka']
@@ -2109,7 +2109,7 @@ def edit_data_uji_asli_weka(id):
 @read_session_weka
 def delete_data_uji_asli_weka(id):
     if request.method == 'POST':
-        cc=con
+        cc=g.con
         cursor = cc.cursor()
         id=id
         print id
@@ -2125,7 +2125,7 @@ def delete_data_uji_asli_weka(id):
 @app.route('/count_data_uji_weka', methods=['POST','GET'])
 @read_session_weka
 def count_data_uji_weka():
-    cc=con
+    cc=g.con
     cursor = cc.cursor()
     id_test = session['id_weka']
     print session['id_weka']
@@ -2192,7 +2192,7 @@ def count_data_uji_weka():
 
 @read_session_weka
 def p_cluster_uji_weka(x, vkj):
-    c = con
+    c = g.con
     cursor = c.cursor()
     id_test = session['id_weka']
     #print id_test
@@ -2211,7 +2211,7 @@ def p_cluster_uji_weka(x, vkj):
         
         miu = x
         
-        #convert tuple to numpy array
+        #g.convert tuple to numpy array
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -2222,7 +2222,7 @@ def p_cluster_uji_weka(x, vkj):
         print a
         #mengkuadratkan numpy X ^ w
         miu2 = np.power(miu,w)
-        #convert numpy to list
+        #g.convert numpy to list
         list_miu2 = miu2.tolist()
         #initial a list 
         s=[[] for i in range(len(list_mus))]
@@ -2396,7 +2396,7 @@ def p_cluster_uji_weka(x, vkj):
 def view_result_uji_weka():
     try:
         id_test = session['id_weka']
-        c =con
+        c =g.con
         cursor = c.cursor()
         query = "SELECT * from all_hasil_weka where id_test = '%s' and stts_weka='1' " %(id_test)
         cursor.execute(query)
@@ -2435,7 +2435,7 @@ def view_result_uji_weka():
 @app.route('/delete_test_weka/<id_test>', methods=['POST','GET'])
 @read_session_weka
 def delete_test_weka(id_test):
-    cc=con
+    cc=g.con
     cursor= cc.cursor()
     if request.method=='POST':
         query = "delete from tbl_test where id_test =%s" %(id_test)
@@ -2449,7 +2449,7 @@ def delete_test_weka(id_test):
 @app.route('/laporan', methods=['GET', 'POST'])
 @read_session
 def laporan():  
-    c = con
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts=0,1,null))'jumlah_latih',count(if(stts=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik on tbl_test.id_test = tbl_mustahik.id_test where status_test='0' group by id_test"
     cursor.execute(query)
@@ -2459,7 +2459,7 @@ def laporan():
 @app.route('/laporan_weka', methods=['GET', 'POST'])
 @read_session_weka
 def laporan_weka():  
-    c = con
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts_weka=0,1,null))'jumlah_latih',count(if(stts_weka=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik_weka on tbl_test.id_test = tbl_mustahik_weka.id_test where status_test='1' group by id_test"
     cursor.execute(query)
@@ -2471,7 +2471,7 @@ def laporan_weka():
 @read_session
 def laporan_data(id):  
     id=id
-    c = con
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts=0,1,null))'jumlah_latih',count(if(stts=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik on tbl_test.id_test = tbl_mustahik.id_test where status_test='0' and tbl_test.id_test=%s " %(id)
     cursor.execute(query)
@@ -2487,7 +2487,7 @@ def laporan_data(id):
         }
         id = id
         sql  ="select * from all_hasil_laporan where id_test = %s"%(id)
-        c =con
+        c =g.con
         cursor = c.cursor()
         cursor.execute(sql)
         post = cursor.fetchall()
@@ -2514,7 +2514,7 @@ def laporan_data_weka(id):
     }
     id=id
     sql  ="select * from all_hasil_weka_laporan where id_test = %s"%(id)
-    c =con
+    c =g.con
     cursor = c.cursor()
     cursor.execute(sql)
     post = cursor.fetchall()
