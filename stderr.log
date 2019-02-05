@@ -1,0 +1,307 @@
+2019-02-05 23:10:59.829850 [ERROR] [15356] wsgiHandler getApp [application] failed, pApp=(nil).
+AttributeError: 'module' object has no attribute 'application'
+Exception AttributeError: "'module' object has no attribute 'application'" in <module 'threading' from '/opt/alt/python27/lib64/python2.7/threading.pyc'> ignored
+2019-02-05 23:13:29.122004 [ERROR] [17468] wsgiHandler getApp [application] failed, pApp=(nil).
+AttributeError: 'module' object has no attribute 'application'
+Exception AttributeError: "'module' object has no attribute 'application'" in <module 'threading' from '/opt/alt/python27/lib64/python2.7/threading.pyc'> ignored
+2019-02-05 23:15:14.627611 [ERROR] [19852] wsgiHandler getApp [application] failed, pApp=(nil).
+AttributeError: 'module' object has no attribute 'application'
+Exception AttributeError: "'module' object has no attribute 'application'" in <module 'threading' from '/opt/alt/python27/lib64/python2.7/threading.pyc'> ignored
+2019-02-05 23:17:21.230934 [ERROR] [22158] wsgiHandler getApp [application] failed, pApp=(nil).
+AttributeError: 'module' object has no attribute 'application'
+Exception AttributeError: "'module' object has no attribute 'application'" in <module 'threading' from '/opt/alt/python27/lib64/python2.7/threading.pyc'> ignored
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+username ditemukan
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test_weka [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 1414, in save_test_weka
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:flask.app:Exception on /save_test [GET]
+Traceback (most recent call last):
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/upzpana1/TA/app/views.py", line 42, in wrap
+    return f(*args, **kwargs)
+  File "/home/upzpana1/TA/app/views.py", line 174, in save_test
+    cursor.execute(query)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 255, in execute
+    self.errorhandler(self, exc, value)
+  File "/home/upzpana1/virtualenv/TA/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+OperationalError: (2006, 'MySQL server has gone away')
