@@ -34,8 +34,8 @@
  <!-- Main content -->
  <section class="content">
     <div class="container-fluid">
+    
       <div class="row">
-
           <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Info Data</h3>
@@ -111,34 +111,22 @@
                   <div class="col-12 col-md-12" >
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#cek_miu">Cek Miu</button>
                   </div>
-      </div>
+              </div>
       <!-- /.card-body -->
-          </div>
-
-  
- 
-
+      </div>
 
 
         <div class="col-12">
-              <div class="card card-success">
+              <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Tabel hasil</h3>
+                  <h3 class="card-title">Tabel Hasil Pelatihan Data</h3>
   
-                  <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-  
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                  <table class="table table-hover" border="2">
-                    <tbody><tr>
+                <table  id="example2" class="table table-bordered table-hover">
+                    <thead><tr>
                       <th>ID</th>
                       <th>Nama Mustahik</th>
                       <th>Usia</th>
@@ -150,6 +138,8 @@
                       <th>Manual Cluster</th>
                       <th>Program Cluster</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {% for post in post %}
                     <tr>
                       <td>{{post[0]}}</td>
@@ -176,7 +166,8 @@
                       </td>
                     </tr>
                     {% endfor %}
-                  </tbody></table>
+                  </tbody>
+                </table>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -232,6 +223,34 @@
   <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
 </footer>
 </div>
-{% include '/based/js.html' %}
+
+<script src="../static/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../static/plugins/datatables/jquery.dataTables.js"></script>
+<script src="../static/plugins/datatables/dataTables.bootstrap4.js"></script>
+<!-- SlimScroll -->
+<script src="../static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../static/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../static/dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
 </body>
 </html>

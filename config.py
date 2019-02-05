@@ -2,9 +2,8 @@ import os, json
 import MySQLdb as mysql
 import sys
 
-con = ""
 try:
-    con = mysql.connect('localhost', 'root', 'ALFIAN123', 'db_fcm')
+    con = mysql.connect('adminupz.mysql.pythonanywhere-services.com', 'adminupz', 'ALFIAN123', 'adminupz$TA')
 except Exception as e:
     print "Error %d: %s" % (e.args[0],e.args[1])
     # sys.exit(1)
