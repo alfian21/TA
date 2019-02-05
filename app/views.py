@@ -118,17 +118,17 @@ def importdata(booksheet):
     cc = con
     cursor = cc.cursor()
     id_test = session['id']
-    x1_min = 17.0
+    x1_min = 27.0
     x1_max = 80.0
-    x2_min = 0.0
-    x2_max = 3200000.0
+    x2_min = 450000.0
+    x2_max = 5000000.0
     x3_min = 1.0
     x3_max = 5.0
-    x4_min = 100000000.0
+    x4_min = 150000000.0
     x4_max = 503000000.0
     x5_min = 1.0
     x5_max = 18.0
-    x6_min = 0.0
+    x6_min = 1000000.0
     x6_max = 2500000.0
     
     #create a loop to iterate through each row in the XLS file
@@ -244,17 +244,17 @@ def tambah_data_latih_asli():
             e = request.form['x5']
             f = request.form['x6']
             cc = request.form['c']
-            x1_min = 17.0
+            x1_min = 27.0
             x1_max = 80.0
-            x2_min = 0.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
             x3_min = 1.0
             x3_max = 5.0
-            x4_min = 100000000.0
+            x4_min = 150000000.0
             x4_max = 503000000.0
             x5_min = 1.0
             x5_max = 18.0
-            x6_min = 0.0
+            x6_min = 1000000.0
             x6_max = 2500000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
@@ -301,14 +301,14 @@ def edit_data_latih_asli(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-            x2_min = 700000.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
             x3_min = 1.0
             x3_max = 5.0
             x4_min = 150000000.0
             x4_max = 503000000.0
-            x5_min = 6.0
-            x5_max = 12.0
+            x5_min = 1.0
+            x5_max = 18.0
             x6_min = 1000000.0
             x6_max = 2500000.0
         
@@ -565,14 +565,18 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
 
         #cek sukses
         benar = 0.0
-        query="select c1 from tbl_mustahik where id_test = '%s' and stts='0' " %(id_test)
+        salah = 0.0
+        query="select c1,c2 from tbl_mustahik where id_test = '%s' and stts='0' " %(id_test)
         cursor.execute(query)
         c.commit()
         cek = cursor.fetchall()
         for j in range(len(list_mus)):
-            if c_hasil[j][0] == cek[j]:
+            if c_hasil[j][0] == cek[j][0] and c_hasil[j][1] == cek[j][1]:
                 benar +=1.0
+            else:
+                salah +=1.0
         print benar
+        print salah
         print len(list_mus)
         persen = ((benar/float(len(list_mus)))*100.0)
         print persen
@@ -796,17 +800,17 @@ def importdata_uji(booksheet):
     c = con
     cursor = c.cursor()
     id_test = session['id']
-    x1_min = 17.0
+    x1_min = 27.0
     x1_max = 80.0
-    x2_min = 0.0
-    x2_max = 3200000.0
+    x2_min = 450000.0
+    x2_max = 5000000.0
     x3_min = 1.0
     x3_max = 5.0
-    x4_min = 100000000.0
+    x4_min = 150000000.0
     x4_max = 503000000.0
     x5_min = 1.0
     x5_max = 18.0
-    x6_min = 0.0
+    x6_min = 1000000.0
     x6_max = 2500000.0
     #create a loop to iterate through each row in the XLS file
     for r in range(5, booksheet.nrows):
@@ -869,17 +873,17 @@ def tambah_data_uji_asli():
             e = request.form['x5']
             f = request.form['x6']
             cc = request.form['c']
-            x1_min = 17.0
+            x1_min = 27.0
             x1_max = 80.0
-            x2_min = 0.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
             x3_min = 1.0
             x3_max = 5.0
-            x4_min = 100000000.0
+            x4_min = 150000000.0
             x4_max = 503000000.0
             x5_min = 1.0
             x5_max = 18.0
-            x6_min = 0.0
+            x6_min = 1000000.0
             x6_max = 2500000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
@@ -924,17 +928,17 @@ def edit_data_uji_asli(id):
             e = request.form['x5']
             f = request.form['x6']
             cc = request.form['c']
-            x1_min = 17.0
+            x1_min = 27.0
             x1_max = 80.0
-            x2_min = 0.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
             x3_min = 1.0
             x3_max = 5.0
-            x4_min = 100000000.0
+            x4_min = 150000000.0
             x4_max = 503000000.0
             x5_min = 1.0
             x5_max = 18.0
-            x6_min = 0.0
+            x6_min = 1000000.0
             x6_max = 2500000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
@@ -1373,10 +1377,10 @@ def importdata_weka(booksheet):
     c = con
     cursor = c.cursor()
     id_test = session['id_weka']
-    x1_min = 17.0
+    x1_min = 27.0
     x1_max = 80.0
     x2_min = 450000.0
-    x2_max = 3200000.0
+    x2_max = 5000000.0
     #create a loop to iterate through each row in the XLS file
     for r in range(5, booksheet.nrows):
         try:
@@ -1477,10 +1481,10 @@ def tambah_data_latih_asli_weka():
             a = request.form['x1']
             b = request.form['x2']
             cc = request.form['c']
-            x1_min = 17.0
+            x1_min = 27.0
             x1_max = 80.0
             x2_min = 450000.0
-            x2_max = 3200000.0
+            x2_max = 5000000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
@@ -1518,8 +1522,8 @@ def edit_data_latih_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-            x2_min = 700000.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
@@ -1982,7 +1986,7 @@ def importdata_uji_weka(booksheet):
     c = con
     cursor = c.cursor()
     id_test = session['id_weka']
-    x1_min = 17.0
+    x1_min = 27.0
     x1_max = 80.0
     x2_min = 450000.0
     x2_max = 5000000.0
@@ -2037,10 +2041,10 @@ def tambah_data_uji_asli_weka():
             a = request.form['x1']
             b = request.form['x2']
             cc = request.form['c']
-            x1_min = 17.0
+            x1_min = 27.0
             x1_max = 80.0
-            x2_min = 0.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
@@ -2078,8 +2082,8 @@ def edit_data_uji_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-            x2_min = 700000.0
-            x2_max = 3200000.0
+            x2_min = 450000.0
+            x2_max = 5000000.0
         
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
