@@ -423,13 +423,8 @@ def hitung_fcm(x, iterasi_input, error_input, w_input):
 
         it = 1
         miu = x
-<<<<<<< HEAD
-        
-        #g.convert tuple to numpy array
-=======
 
         #convert tuple to numpy array
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1081,13 +1076,8 @@ def p_cluster_uji(x, vkj):
         po = 0
 
         miu = x
-<<<<<<< HEAD
-        
-        #g.convert tuple to numpy array
-=======
 
         #convert tuple to numpy array
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -1494,13 +1484,8 @@ def tambah_data_latih_asli_weka():
             x1_min = 27.0
             x1_max = 80.0
             x2_min = 450000.0
-<<<<<<< HEAD
-            x2_max = 3200000.0
-
-=======
             x2_max = 5000000.0
         
->>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -1537,15 +1522,9 @@ def edit_data_latih_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-<<<<<<< HEAD
-            x2_min = 700000.0
-            x2_max = 3200000.0
-
-=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
->>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -1649,13 +1628,8 @@ def p_cluster_weka(x, iterasi_input, error_input, w_input):
         error = float(error_input)
         it = 1
         miu = x
-<<<<<<< HEAD
-        
-        #g.convert tuple to numpy array
-=======
 
         #convert tuple to numpy array
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -2069,15 +2043,9 @@ def tambah_data_uji_asli_weka():
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-<<<<<<< HEAD
-            x2_min = 0.0
-            x2_max = 3200000.0
-
-=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
->>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -2114,15 +2082,9 @@ def edit_data_uji_asli_weka(id):
             cc = request.form['c']
             x1_min = 27.0
             x1_max = 80.0
-<<<<<<< HEAD
-            x2_min = 700000.0
-            x2_max = 3200000.0
-
-=======
             x2_min = 450000.0
             x2_max = 5000000.0
         
->>>>>>> df9bf9b411b8adb66db02e897e702a74892163df
             x1= (float(a) - x1_min) / (x1_max-x1_min)
             x2= (x2_max - float(b)) / (x2_max-x2_min)
             if cc == "YA":
@@ -2248,13 +2210,8 @@ def p_cluster_uji_weka(x, vkj):
         po = 0
 
         miu = x
-<<<<<<< HEAD
-        
-        #g.convert tuple to numpy array
-=======
 
         #convert tuple to numpy array
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
         mus = np.asarray(data)
         p_objecktif = []
         list_mus = mus.tolist()
@@ -2491,13 +2448,8 @@ def delete_test_weka(id_test):
 #laporan
 @app.route('/laporan', methods=['GET', 'POST'])
 @read_session
-<<<<<<< HEAD
-def laporan():  
-    c = g.con
-=======
 def laporan():
-    c = con
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts=0,1,null))'jumlah_latih',count(if(stts=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik on tbl_test.id_test = tbl_mustahik.id_test where status_test='0' group by id_test"
     cursor.execute(query)
@@ -2506,13 +2458,8 @@ def laporan():
 
 @app.route('/laporan_weka', methods=['GET', 'POST'])
 @read_session_weka
-<<<<<<< HEAD
-def laporan_weka():  
-    c = g.con
-=======
 def laporan_weka():
-    c = con
->>>>>>> b0d94d62d84c49a4509f1ec113f34f3b1dbefacc
+    c = g.con
     cursor = c.cursor()
     query = " select tbl_test.id_test, nama_test, max_iterasi, error, sukses, error_uji, sukses_uji, status_test, pangkat, count(if(stts_weka=0,1,null))'jumlah_latih',count(if(stts_weka=1,1,null))'jumlah_uji' from tbl_test inner join tbl_mustahik_weka on tbl_test.id_test = tbl_mustahik_weka.id_test where status_test='1' group by id_test"
     cursor.execute(query)
