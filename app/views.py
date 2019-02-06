@@ -13,6 +13,9 @@ import pdfkit
 import time
 
 BASE_lap = os.path.dirname(os.path.realpath(__file__))
+BASE = os.path.dirname(BASE_lap)
+WK = os.path.join(BASE, 'wkhtmltox/bin/wkhtmltopdf')
+PDF_CONFIG = pdfkit.configuration(wkhtmltopdf=WK)
 LAPORAN_FOLDER = os.path.join(os.path.join(BASE_lap, 'static'), 'laporan')
 
 IMG = os.path.join(os.path.join(BASE_lap,'static'), 'img')
@@ -2497,7 +2500,7 @@ def laporan_data(id):
         waktu = time.asctime( time.localtime(time.time()) )
         logo = os.path.join(IMG, '21.jpg')
         page = render_template('laporan/lap_data.html',post1=post1, post=post, waktu=waktu, logo=logo)
-        pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik.pdf"), options=options)
+        pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik.pdf"), options=options, configuration=PDF_CONFIG)
         return send_file(os.path.join(LAPORAN_FOLDER, "data_mustahik.pdf"), mimetype='application/pdf')
 
 
@@ -2524,6 +2527,6 @@ def laporan_data_weka(id):
     waktu = time.asctime( time.localtime(time.time()) )
     logo = os.path.join(IMG, '21.jpg')
     page = render_template('laporan/laporan_data_weka.html',post1=post1, post=post, waktu=waktu, logo=logo)
-    pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik_weka.pdf"), options=options)
+    pdfkit.from_string(page, os.path.join(LAPORAN_FOLDER, "data_mustahik_weka.pdf"), configuration=PDF_CONFIG, options=options)
     return send_file(os.path.join(LAPORAN_FOLDER, "data_mustahik_weka.pdf"), mimetype='application/pdf')
 
